@@ -1,11 +1,6 @@
 var canvas = document.getElementById("canvas");
 var c = canvas.getContext("2d");
-let nimage = new Image();
-		nimage.src = "img/down_pipe.png";	
-function init()
-{
-	imgs.loadImg();
-}
+
 function Bird(x, y, image) {
 	this.x = x,
 	this.y = y,
@@ -23,7 +18,7 @@ function Bird(x, y, image) {
 
 function FlappyBird() {}
 FlappyBird.prototype = {
-	 // bird
+	bird: null, // bird
 	bg: null, // background
 
 	mapWidth: 340, // width
@@ -31,7 +26,7 @@ FlappyBird.prototype = {
 	startX: 90, // intinal position
 	startY: 225,
 	upSpeed: 7, // Up speed
-	downSpeed: 3, // Down speed
+	downSpeed: 2, // Down speed
 	line: 56, // height of land
 	
 	CreateMap: function() {
@@ -51,15 +46,13 @@ FlappyBird.prototype = {
 		image.onload = function(){
 			this.bird = new Bird(this.startX, this.startY, image);
 		}.bind(this);
-
-		
 	},
-
 
 	CanMove: function() { 
 		if (this.bird.y < 0 || this.bird.y > this.mapHeight - this.bird.height - this.line) {
 			this.gameOver = true;
 		} else {
+			this.gameOver = false;
 			var boundary = [{
 				x: this.bird.x,
 				y: this.bird.y
@@ -97,8 +90,6 @@ FlappyBird.prototype = {
 	}
 };
 
-
-
 function component(img,width, height, color, x, y) {
     this.width = width;
 	this.height = height;
@@ -108,8 +99,7 @@ function component(img,width, height, color, x, y) {
     this.y = y;    
     this.update = function() {
         //c.fillStyle = color;
-		c.drawImage(img,this.x, this.y, this.width, this.height);
-		
+        c.drawImage(img,this.x, this.y, this.width, this.height);
     }
     this.crashWith = function(otherobj) {
         var myleft = this.x;
@@ -123,7 +113,7 @@ function component(img,width, height, color, x, y) {
         var crash = true;
         if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
             crash = false;
-        }
+		}
         return crash;
     }
 }
@@ -160,8 +150,9 @@ let down_img = new Image();
 down_img.src = "img/camp_down.jpeg";
 let seconds = 0;
 let stop = false;
+let life = 3;
+let notover=false;
 function obstacle(){
-	
 	count += 1;
 	if ((count == 1) || ((count%150) == 0)) {
 		let x = game.mapWidth;
@@ -183,10 +174,8 @@ function obstacle(){
 
 function InitGame() {
 	c.font = "40px Arial";
-	
 	game.CreateMap();
-	
-    
+
 	canvas.onmousedown = function() {
 		game.touch = true;
 	}
@@ -200,16 +189,10 @@ function InitGame() {
 		}
 	}
 }
-function kd(e) {
-    if (e.keyCode === 32) {
-      bird2.speed = -10;
-    }
-  }
+
 
 function RunGame(speed) {
 	bg_sound.play();
-	
-	   
 	let s = setInterval(function () {
 		seconds++;
 		document.getElementById('timer').innerHTML = "Time elapsed: " + seconds + "s";
@@ -231,18 +214,26 @@ function RunGame(speed) {
 		game.ClearScreen();
 		game.CheckTouch();
 		for (i = 0; i < myObstacles.length; i += 1) {
-			if (myObstacles[i].crashWith(game.bird)) {
+			if ((myObstacles[i].crashWith(game.bird)==true)&& (life == 1)&& notover==false) {
 				stop=true;
 				bg_sound.stop();
 				crash_sound.play();
 				game.ShowOver();
 				clearInterval(updateTimer);
+				console.log("gameover");
 				return;
 			} 
+			if (myObstacles[i].crashWith(game.bird)==true && (life > 1) && notover==false){
+				life--;
+				console.log(life);
+				wait();	
+			}
 		}
 		obstacle();
-		init();
-		bird2.birdfly();
-		window.addEventListener('keydown',kd,false)
 	}, speed);
+}
+
+function wait(){
+	notover=true;
+	setTimeout(function(){ notover=false; }, 1000);
 }

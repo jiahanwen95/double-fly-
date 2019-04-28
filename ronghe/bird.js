@@ -1,7 +1,6 @@
 var canvas = document.getElementById("canvas");
 var c = canvas.getContext("2d");
-let nimage = new Image();
-nimage.src = "img/down_pipe.png";
+let multi=false;
 function init() {
 	imgs.loadImg();
 }
@@ -249,8 +248,11 @@ function RunGame(speed) {
 		}
 		obstacle();
 		init();
+		if(multi==true)
+		{
 		bird2.birdfly();
-		window.addEventListener('keydown', kd, false)
+		window.addEventListener('keydown',kd,false)
+		}
 	}, speed);
 }
 

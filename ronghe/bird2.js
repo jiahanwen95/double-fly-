@@ -50,6 +50,15 @@ let bird2 = {
 
 
 
+function twoplayer()
+{
+multi=true;
+	
+}
+
+
+
+
 
 
 

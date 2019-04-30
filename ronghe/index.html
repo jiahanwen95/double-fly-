@@ -6,11 +6,28 @@
 	<title>Flappy Jay</title>
 
 </head>
+<link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
 <style>
 	.life1 {
 		position: absolute;
-		left: 550px;
+		top: 435px;
+		left: 590px;
 		font-variant: small-caps;
+	}
+	#timer{
+			background-color:rgba(0, 0, 255, 1);
+			width: 85px;
+			color: red;
+			user-select: none;
+			font-display: bold;
+			font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+			display: block;
+			border: solid 2px blue;
+			border-radius: 5px;
+			box-shadow: 3px 6px 9px red;
+	}
+	#twoplayeropt{
+		user-select: none;
 	}
 </style>
 
@@ -18,12 +35,12 @@
 	<div id="life1" class="life1"></div>
 	<center>
 		<canvas id="canvas" width="340" height="453" style="border:2px solid #000;background:#fff;"></canvas>
-		<div id="timer"></div>
+		<div id="timer"> <b> Timer: </b> <br> 00m 00s <div style="font-size: 10px">(Timer starts when the game starts!)</div></div>
 		<script src="imagload.js"></script>
 		<script src="bird2.js"></script>
 		<script src="bird.js" type="text/javascript"></script>
 
-<input type="checkbox" onchange="twoplayer()"> 2p (using space to control)
+<input id="twoplayeropt" type="checkbox" onchange="twoplayer()"><span id="twoplayeropt">2p (using space to control)</span> 
 
 </body>
 

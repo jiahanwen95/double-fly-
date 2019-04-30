@@ -157,6 +157,7 @@ up_img.src = "img/camp_up.jpeg";
 let down_img = new Image();
 down_img.src = "img/camp_down.jpeg";
 let seconds = 0;
+let minutes = 0;
 let stop = false;
 let life = 3;
 let notover=false;
@@ -210,9 +211,29 @@ function kd(e) {
 function RunGame(speed) {
 	bg_sound.play();
 	let s = setInterval(function () {
+		let m = "";
 		seconds++;
+		if(seconds>59){
+			minutes += 1;
+			speed = speed - 0.00000000000000000000000000000000000001;
+			game.upSpeed = ((game.upSpeed>2)?game.upSpeed/1.9:game.upSpeed=2);
+			game.downSpeed = ((game.downSpeed>1)?game.downSpeed/1.6:game.downSpeed=1);
+			console.log(game.upSpeed);
+			console.log(game.downSpeed);
+			seconds = 0;
+			RunGame(speed);
+		}
+		if(minutes<10 && m.length < 2){
+			m = "0" + minutes;
+		}
+		else{
+			m = minutes;
+		}
+		if(seconds<10){
+			seconds = "0" + seconds;
+		}
+		document.getElementById('timer').innerHTML = "<b> Timer: </b> <br>" + m + "m " + seconds + "s ";
 		document.getElementById('life1').innerHTML = "bird 1 lifes: " + life;
-		document.getElementById('timer').innerHTML = "Time elapsed: " + seconds + "s";
 		if (stop) {
 			clearInterval(s);
 		}

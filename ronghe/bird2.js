@@ -47,12 +47,11 @@ let bird2 = {
 	  this.alive = false;
 	}
   }
-
-function CheckHiting(newPipe){
-		if(bird2.x+bird2.bird2.width==newPipe.x 
+	function CheckHiting(newPipe){
+		if(bird2.posX+bird2.bird2.width==newPipe.x 
 		)
 		{
-			if(bird2.y<newPipe.height)
+			if(bird2.posY<newPipe.height)
 			{
         bird2.dead();
       }

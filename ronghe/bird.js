@@ -148,6 +148,7 @@ var GameTime = null;
 var btn_start;
 let bg_sound = new sound("sound/bensound-perception.mp3");
 let crash_sound = new sound("sound/076932073-crash-impact.m4a");
+let mush_sound = new sound("sound/smb_powerup.wav");
 let myObstacles = new Array();
 let myMushrooms = new Array();
 window.onload = InitGame;
@@ -268,7 +269,7 @@ function RunGame(speed) {
 		for (i = 0; i < myMushrooms.length; i += 1)
 			if (myMushrooms[i].crashWith(game.bird) && (mushMode == false)) {
 				mushMode = true;
-				//this.bird.image = jay_img;
+				mush_sound.play();
 				life++;
 			}
 		for (i = 0; i < myObstacles.length; i += 1) {

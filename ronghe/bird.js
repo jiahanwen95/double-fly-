@@ -44,7 +44,7 @@ FlappyBird.prototype = {
 		};
 
 		//bird
-		var image = new Image();
+		let image = new Image();
 		image.src = "img/bird.png";
 		image.onload = function () {
 			this.bird = new Bird(this.startX, this.startY, image);
@@ -248,7 +248,7 @@ function RunGame(speed) {
 			seconds = "0" + seconds;
 		}
 		document.getElementById('timer').innerHTML = "<b> Timer: </b> <br>" + m + "m " + seconds + "s ";
-		document.getElementById('life1').innerHTML = "bird 1 lifes: " + life;
+		document.getElementById('life1').innerHTML = "bird 1 lives: " + life;
 		if (stop) {
 			clearInterval(s);
 		}
@@ -270,6 +270,7 @@ function RunGame(speed) {
 			if (myMushrooms[i].crashWith(game.bird) && (mushMode == false)) {
 				mushMode = true;
 				mush_sound.play();
+				game.bird.image.src = "img/Jayhawk.png";
 				life++;
 			}
 		for (i = 0; i < myObstacles.length; i += 1) {
@@ -284,6 +285,7 @@ function RunGame(speed) {
 			}
 			if (myObstacles[i].crashWith(game.bird) == true && (life > 1) && notover == false) {
 				life--;
+				game.bird.image.src = "img/bird.png";
 				mushMode = false;
 				console.log(life);
 				wait();

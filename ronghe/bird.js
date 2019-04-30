@@ -290,6 +290,17 @@ function RunGame(speed) {
 				console.log(life);
 				wait();
 			}
+			CheckHiting(myObstacles[i]);
+			if(!bird2.alive)
+			{
+				stop=true;
+				bg_sound.stop();
+				crash_sound.play();
+				game.ShowOver();
+				clearInterval(updateTimer);
+				return;
+			}
+			
 		}
 		obstacle();
 		init();

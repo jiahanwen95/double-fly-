@@ -149,6 +149,7 @@ var btn_start;
 let bg_sound = new sound("sound/bensound-perception.mp3");
 let crash_sound = new sound("sound/076932073-crash-impact.m4a");
 let myObstacles = new Array();
+let myMushrooms = new Array();
 window.onload = InitGame;
 let count = 0;
 let h = 120;
@@ -156,11 +157,16 @@ let up_img = new Image();
 up_img.src = "img/camp_up.jpeg";
 let down_img = new Image();
 down_img.src = "img/camp_down.jpeg";
+let mush_img = new Image();
+mush_img.src = "img/mushroom.png"
+let jay_img = new Image();
+jay_img.src = "img/Jayhawk.png";
 let seconds = 0;
 let minutes = 0;
 let stop = false;
 let life = 3;
 let notover=false;
+let mushMode = false;
 
 function obstacle() {
 
@@ -170,6 +176,7 @@ function obstacle() {
 		let y = 0;
 		myObstacles.push(new component(down_img, 20, h, "green", x, y));
 		myObstacles.push(new component(up_img, 20, game.mapHeight - h - 205, "green", x, h + 150));
+		myMushrooms.push(new component(mush_img, 50, 50, "green", x-20 , h+50));
 		if (h > 160) {
 			h += -Math.random() * 80;
 		}
@@ -180,6 +187,13 @@ function obstacle() {
 	for (i = 0; i < myObstacles.length; i += 1) {
 		myObstacles[i].x += -1;
 		myObstacles[i].update();
+	}
+	for (i = 0; i < myMushrooms.length; i += 1) {
+		if( i % 10 == 1)
+		{
+			myMushrooms[i].x += -1;
+			myMushrooms[i].update();
+		}
 	}
 }
 
@@ -251,6 +265,12 @@ function RunGame(speed) {
 		}
 		game.ClearScreen();
 		game.CheckTouch();
+		for (i = 0; i < myMushrooms.length; i += 1)
+			if (myMushrooms[i].crashWith(game.bird) && (mushMode == false)) {
+				mushMode = true;
+				//this.bird.image = jay_img;
+				life++;
+			}
 		for (i = 0; i < myObstacles.length; i += 1) {
 			if ((myObstacles[i].crashWith(game.bird) == true) && (life == 1) && notover == false) {
 				stop = true;
@@ -263,6 +283,7 @@ function RunGame(speed) {
 			}
 			if (myObstacles[i].crashWith(game.bird) == true && (life > 1) && notover == false) {
 				life--;
+				mushMode = false;
 				console.log(life);
 				wait();
 			}

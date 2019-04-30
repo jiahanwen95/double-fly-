@@ -49,7 +49,16 @@ let bird2 = {
   }
 
 
-
+function CheckHiting(newPipe){
+		if(bird2.posX+bird2.bird2.width==newPipe.x 
+		)
+		{
+			if(bird2.posY<newPipe.height)
+			{
+        bird2.dead();
+      }
+    }
+	}
 function twoplayer()
 {
 multi=true;

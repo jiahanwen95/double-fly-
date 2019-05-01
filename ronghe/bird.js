@@ -234,8 +234,8 @@ function RunGame(speed) {
 			speed = speed - 0.00000000000000000000000000000000000001;
 			game.upSpeed = ((game.upSpeed>2)?game.upSpeed/1.9:game.upSpeed=2);
 			game.downSpeed = ((game.downSpeed>1)?game.downSpeed/1.6:game.downSpeed=1);
-			console.log(game.upSpeed);
-			console.log(game.downSpeed);
+			//console.log(game.upSpeed);
+			//console.log(game.downSpeed);
 			seconds = 0;
 			RunGame(speed);
 		}

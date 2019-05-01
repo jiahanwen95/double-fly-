@@ -16,6 +16,8 @@ Background sound: https://www.bensound.com/royalty-free-music/track/perception
 
 Crash Sound: https://www.pond5.com/sound-effect/76932073/crash-impact.html
 
+Restart Button: https://www.magnet4blogging.net/button-styles/
+
 References:
 
   https://www.w3schools.com/: For help with HTML and Javascript.
@@ -23,3 +25,4 @@ References:
   https://stackoverflow.com/: For any errors and bugs we faced.
   
   https://github.com/sourabhv/FlapPyBird/tree/master/assets/sprites: For Some Images from the original flappy bird.
+  

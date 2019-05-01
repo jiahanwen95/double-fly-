@@ -1,17 +1,19 @@
-
-
 let bird2 = {
 	bird2: imgs.bd,
+	
 	
 	posX: 100,
 	posY: 200,
 	speed: 0,
 	index: 0,
 	alive: true,//check bird2 hit ground or pipe
-
+  
 	draw: function (bird2) {
-	  c.drawImage(bird2,this.posX,this.posY);
+	
+			c.drawImage(bird2,this.posX,this.posY);
+		
 	},
+
 	//bird2 fly
 	birdfly: function () {
 	  //change the Y coordinates by given speed
@@ -19,14 +21,14 @@ let bird2 = {
 	  //accleration is 1
 	  this.speed++;
 	  //hit ground or top cellin, dead
-	  if(this.posY >= 395){
+	  if(this.posY > 453-56){
 		this.speed = 0;
 		
-		this.dead();
+		game.gameOver=true;
 	  }
-	  if(this.posY <= 0){
+	  if(this.posY <=0){
 		this.speed = 0;
-		this.dead();
+		game.gameOver=true;
 	  }
 		
 		//if speed positionve, down, if speed negative,  birdup
@@ -43,27 +45,56 @@ let bird2 = {
 	  }
 	},
 	
-	dead: function() {
-	  this.alive = false;
+
 	}
-  }
 
 
 
+
+
+function CheckHiting(newPipe){
+		
+		let myleft = newPipe.x;
+		let myright = newPipe.x + (newPipe.width);
+		let mytop = newPipe.y;
+		let mybottom = newPipe.y + (newPipe.height);
+		let otherleft = bird2.posX;
+		let otherright = bird2.posX + (bird2.bird2.width);
+		let othertop = bird2.posY;
+		let otherbottom = bird2.posY; //+ (bird2.height);
+		var crash = true;
+
+		if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+			crash = false;
+		}
+		return crash;
+
+	}
+
+	function CheckHitingM(m){
+		
+		let myleft = m.x;
+		let myright = m.x + (m.width);
+		let mytop = m.y;
+		let mybottom = m.y + (m.height);
+		let otherleft = bird2.posX;
+		let otherright = bird2.posX + (bird2.bird2.width);
+		let othertop = bird2.posY;
+		let otherbottom = bird2.posY; //+ (bird2.height);
+		var crash = true;
+		if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+			crash = false;
+		}
+		return crash;
+
+
+	}
 function twoplayer()
 {
+
 multi=true;
-	
+
 }
-
-
-
-
-
-
-
-
-
 
 
 

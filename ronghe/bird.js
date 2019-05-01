@@ -1,6 +1,7 @@
 var canvas = document.getElementById("canvas");
 var c = canvas.getContext("2d");
 let multi=false;
+let mushbool=false;
 function init() {
 	imgs.loadImg();
 }
@@ -248,7 +249,12 @@ function RunGame(speed) {
 			seconds = "0" + seconds;
 		}
 		document.getElementById('timer').innerHTML = "<b> Timer: </b> <br>" + m + "m " + seconds + "s ";
-		document.getElementById('life1').innerHTML = "bird 1 lives: " + life;
+		if(multi){
+			document.getElementById('life1').innerHTML = "bird 2 lives: " + life;
+			}
+			if(!multi){
+				document.getElementById('life1').innerHTML = "bird 1 lives: " + life;
+				}
 		if (stop) {
 			clearInterval(s);
 		}
@@ -266,13 +272,22 @@ function RunGame(speed) {
 		}
 		game.ClearScreen();
 		game.CheckTouch();
-		for (i = 0; i < myMushrooms.length; i += 1)
+		for (i = 0; i < myMushrooms.length; i += 1){
 			if (myMushrooms[i].crashWith(game.bird) && (mushMode == false)) {
 				mushMode = true;
 				mush_sound.play();
 				game.bird.image.src = "img/Jayhawk.png";
 				life++;
 			}
+			if (CheckHitingM(myMushrooms[i])&& (mushMode == false) ) {
+				mushbool=true;
+				mushMode = true;
+				mush_sound.play();
+				
+				life++;
+			}
+		}
+
 		for (i = 0; i < myObstacles.length; i += 1) {
 			if ((myObstacles[i].crashWith(game.bird) == true) && (life == 1) && notover == false) {
 				stop = true;
@@ -289,6 +304,25 @@ function RunGame(speed) {
 				mushMode = false;
 				console.log(life);
 				wait();
+			}
+			if (CheckHiting(myObstacles[i])==true&& (life == 1) && notover == false) {
+				stop = true;
+				bg_sound.stop();
+				crash_sound.play();
+				game.ShowOver();
+				clearInterval(updateTimer);
+				console.log("gameover");
+				return;
+			}
+			if(CheckHiting(myObstacles[i])==true&& (life > 1) && notover == false)
+			{   mushbool=false;
+				life--;
+				mushMode = false;
+				
+				crash_sound.play();
+				console.log(life);
+				wait();
+				
 			}
 		}
 		obstacle();

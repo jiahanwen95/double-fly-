@@ -2,10 +2,19 @@ let imgs = {
   //preload the imges 
   
   bd:new Image(),
+ 
   
  
   loadImg: function (fn) {
+    if(mushbool==false)
+    {
     this.bd.src = './img/bird2.png';
+    }
+    if(mushbool==true)
+    {
+      this.bd.src = './img/Jayhawk2.png';
+    }
+   
   
    
     let that = this;
@@ -15,7 +24,7 @@ let imgs = {
        
         clearInterval(timer);
        
-        fn();
+        
       }
     }, 50)
   }

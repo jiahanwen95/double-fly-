@@ -28,7 +28,7 @@ References:
   
   https://github.com/sourabhv/FlapPyBird/tree/master/assets/sprites: For Some Images from the original flappy bird.
   
-  Features Added for Project 4:
+  ## Features Added for Project 4:
   1) 2 Player Mode
   2) Extra Lives
   3) Mushroom Features

@@ -14,7 +14,9 @@ let bird2 = {
 		
 	},
 
-	//bird2 fly
+	/**
+	 * bird2 fly function.
+	 */
 	birdfly: function () {
 	  //change the Y coordinates by given speed
 	  this.posY+=this.speed;
@@ -51,6 +53,10 @@ let bird2 = {
 
 
 
+/**
+ * Checks the bird2 crash with obstacles.
+ * @param {Object} newPipe - Pipe Object. 
+ */
 
 function CheckHiting(newPipe){
 		
@@ -71,6 +77,10 @@ function CheckHiting(newPipe){
 
 	}
 
+	/**
+	 * Checks if bird2 hits the mushrooms.
+	 * @param {Object} m - Mushroom Object.
+	 */
 	function CheckHitingM(m){
 		
 		let myleft = m.x;
@@ -89,6 +99,10 @@ function CheckHiting(newPipe){
 
 
 	}
+
+/**
+ * Initializes the 2p-mode.
+ */
 function twoplayer()
 {
 
